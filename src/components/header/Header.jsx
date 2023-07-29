@@ -35,6 +35,44 @@ const Header = () => {
       }, 1000);
     }
   };
+
+  const navigationHandler = (type) => {
+    if (type.toLowerCase() === "movies") {
+      navigate(`/explore/movie`);
+    } else if (type.toLowerCase() === "tv-shows") {
+      navigate(`/explore/tv`);
+    }
+    setMobileMenu(false);
+  };
+  const controlNavbar = (e) => {
+    console.log(window.scrollY);
+    if (window.scrollY > 2000) {
+      if (window.screenY > lastScrollY && !mobileMenu) {
+        setShow("hide");
+      } else {
+        setShow("show");
+      }
+    } else {
+      setShow("top");
+    }
+    setLastScrollY(window.scrollY);
+  };
+
+  useEffect(() => {
+    window.addEventListener("scroll", controlNavbar);
+    return () => {
+      window.removeEventListener("scroll", controlNavbar);
+    };
+  }, [lastScrollY]);
+
+  
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [location]);
+
+
+  
+
   return (
     <header className={`header ${mobileMenu ? "mobileView" : ""} ${show}`}>
       <ContentWrapper>
@@ -42,8 +80,15 @@ const Header = () => {
           <img src={logo} alt="Logo" loading="lazy" />
         </div>
         <ul className="menuItems">
-          <li className="menuItem">Movies</li>
-          <li className="menuItem">TV Shows</li>
+          <li className="menuItem" onClick={() => navigationHandler("movies")}>
+            Movies
+          </li>
+          <li
+            className="menuItem"
+            onClick={() => navigationHandler("tv-shows")}
+          >
+            TV Shows
+          </li>
           <li className="menuItem">
             <HiOutlineSearch onClick={openSearch} />
           </li>
