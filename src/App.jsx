@@ -19,7 +19,6 @@ function App() {
 
   const getConfiguration = async () => {
     const data = await fetchDataFromAPI("/configuration");
-    console.log(data);
     const urls = {
       backDrop: data.images.secure_base_url + "original",
       poster: data.images.secure_base_url + "original",
@@ -28,8 +27,25 @@ function App() {
     dispatch(getApiConfigurations(urls));
   };
 
+  const genresCall = async () => {
+    let promises = [];
+    let endpoints = ["tv", "movie"];
+    let allGenres = {};
+    endpoints.forEach((url) => {
+      promises.push(fetchDataFromAPI(`/genre/${url}/list`));
+    });
+
+    const data = await Promise.all(promises);
+
+    data.map(({ genres }) => {
+      return genres.map((genres) => (allGenres[genres.id] = genres));
+    });
+    dispatch(getGenres(allGenres));
+  };
+
   useEffect(() => {
     getConfiguration();
+    genresCall();
   }, []);
 
   return (
