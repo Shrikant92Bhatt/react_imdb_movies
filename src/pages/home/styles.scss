@@ -1,5 +1,15 @@
+@import "../../mixins.scss";
+
 .homePage{
     padding: 0 10px;
+    .top_section_wrapper {
+            margin: 0 auto;
+    
+            @include md {
+                max-width: 90%;
+                
+            }
+        }
 }
 .carouselSection {
     position: relative;

@@ -8,9 +8,11 @@ const Home = () => {
   return (
     <div className="homePage">
       <HeroBanner />
-      <Trending />
-      <Popular />
-      <TopRated />
+      <div className="top_section_wrapper">
+        <Trending />
+        <Popular />
+        <TopRated />
+      </div>
     </div>
   );
 }
