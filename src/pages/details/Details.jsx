@@ -17,7 +17,7 @@ const Details = () => {
     error: creditsError,
   } = useFetch(`/${mediaType}/${id}/credits`);
   return (
-    <div>
+    <div className='detailPage'>
       <DetailsBanner video={data?.results[0]} crew={credits?.crew} />
       <Cast data={credits?.cast} loading={creditdLoading} />
       <VideosSection data={data} loading={loading} />
