@@ -26,7 +26,7 @@ const SearchResult = () => {
     setPageNum((pre) => pre + 1);
     setLoading(false);
   };
-  
+
   const fetchNextPageData = async () => {
     setLoading(true);
     const searchResult = await fetchDataFromAPI(
@@ -51,7 +51,9 @@ const SearchResult = () => {
 
   return (
     <div className="searchResultsPage">
-      {loading && <Spinner initial={pageNum === 1 ? true : false} />}
+      {loading && !data?.results?.length && (
+        <Spinner initial={pageNum === 1 ? true : false} />
+      )}
 
       <ContentWrapper>
         {!loading && data?.results?.length > 0 ? (
