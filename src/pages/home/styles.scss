@@ -1,0 +1,31 @@
+@import "../../mixins.scss";
+
+.homePage{
+    padding: 0 10px;
+    .top_section_wrapper {
+            margin: 0 auto;
+    
+            @include md {
+                max-width: 90%;
+                
+            }
+        }
+}
+.carouselSection {
+    position: relative;
+    margin-bottom: 70px;
+
+    &>.contentWrapper {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 20px;
+
+    }
+
+    .carouselTitle {
+        font-size: 24px;
+        color: var(--white);
+        font-weight: normal;
+    }
+}
